@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
-import {TopCars, topCars} from "./components/TopCars";
 
 
 function App() {
     return (
-        // <Practice students1={students}/>
-        <TopCars topcars1={topCars}/>
+        <div className="root">
+            <h1>Hello World</h1>
+        </div>
     );
 }
 
