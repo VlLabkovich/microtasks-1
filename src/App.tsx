@@ -1,12 +1,20 @@
 import React from 'react';
 import './App.css';
-import {TopCars, topCars} from "./components/TopCars";
 
 
 function App() {
+    const myFirstSubscriber = () => {
+        alert('Hello Im Vasya')
+    }
+
+    const mySecondCubscriber = () => {
+        alert('Hello Im Ivan')
+    }
     return (
-        // <Practice students1={students}/>
-        <TopCars topcars1={topCars}/>
+        <div className="App">
+            <button onClick={myFirstSubscriber}>MyYoutubeChannel</button>
+            <button onClick={mySecondCubscriber}>MyYoutubeChannel2</button>
+        </div>
     );
 }
 
