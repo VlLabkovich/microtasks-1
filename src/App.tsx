@@ -16,22 +16,39 @@ function App() {
     ])
 
 
-    let currentMoney = money.filter((filteredMoney) => filteredMoney.banknote === 'ruble') // Результат фильтрации передается в метод мап
+    const [filter, setFilter] = useState("all")
 
-    console.log(currentMoney)
+
+    let currentMoney = money
+    if (filter === 'dollar') {
+        currentMoney = money.filter(filteredMoney => filteredMoney.banknote === 'dollar')
+    }
+    if (filter === 'ruble') {
+        currentMoney = money.filter(filteredMoney => filteredMoney.banknote === 'ruble')
+    }
+
+
+    const onclickFilterHandler = (nameButton: string) => {
+    setFilter(nameButton)
+    }
 
     return (
-        <ul>
-            {currentMoney.map((item, index) => {
-                return (
-                    <li key={index}>
-                        <span>{item.banknote}</span>
-                        <span>{item.nominal}</span>
-                        <span>{item.number}</span>
-                    </li>
-                )
-            })}
-        </ul>
+        <>
+            <ul>
+                {currentMoney.map((item, index) => {
+                    return (
+                        <li key={index}>
+                            <span>{item.banknote}</span>
+                            <span>{item.nominal}</span>
+                            <span>{item.number}</span>
+                        </li>
+                    )
+                })}
+            </ul>
+            <button onClick={() => onclickFilterHandler('all')}>All</button>
+            <button onClick={() => onclickFilterHandler('dollar')}>Dollar</button>
+            <button onClick={() => onclickFilterHandler('ruble')}>Ruble</button>
+        </>
     );
 }
 
