@@ -16,14 +16,18 @@ function App() {
     ])
 
 
+    let currentMoney = money.filter((filteredMoney) => filteredMoney.banknote === 'ruble') // Результат фильтрации передается в метод мап
+
+    console.log(currentMoney)
+
     return (
         <ul>
-            {money.map((objFromMoneyArr) => {
+            {currentMoney.map((item, index) => {
                 return (
-                    <li>
-                        <span>{objFromMoneyArr.banknote}</span>
-                        <span>{objFromMoneyArr.nominal}</span>
-                        <span>{objFromMoneyArr.number}</span>
+                    <li key={index}>
+                        <span>{item.banknote}</span>
+                        <span>{item.nominal}</span>
+                        <span>{item.number}</span>
                     </li>
                 )
             })}
