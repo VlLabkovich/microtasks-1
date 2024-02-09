@@ -23,6 +23,7 @@ function App() {
 
     let [filterMoney, setFilterMoney] = useState('All')
 
+    //2// При нажатии на кнопку в функцию приходит имя и сеттается через useState
     const filterMoneyFoo = (nameBtn: string) => {
         setFilterMoney(nameBtn)
     }
@@ -30,7 +31,8 @@ function App() {
 debugger
 
     const filteredMoneyFoo = () => {
-
+        //3// filterMoney сразу по умолчанию 'All' затем становится значение из setFilterMoney(которое пришло во втором пункте)
+        // оно попадает в конструкцию switch и исходя из условия отфильтровывается
         switch (filterMoney) {
             case'Dollars': {
                 return money.filter(el => el.banknots === 'Dollars')
@@ -45,11 +47,11 @@ debugger
         return money
     }
 
-
-
     return (
         <>
             <ul>
+                {/*//4// Мапом проходим по функции, а именно по значению которое она вернула(это отсортированнный объект)
+                отрисовываем результат фильтрации*/}
                 {filteredMoneyFoo().map((item, index) => {
                     return (
                         <li key={index}>
@@ -60,6 +62,7 @@ debugger
                     )
                 })}
             </ul>
+            {/* -1- Создали универсальную кнопку и прокидываем в неё через пропсы имя и колл-бэк функцию*/}
             <Button name={'All'} callBack={() => filterMoneyFoo('All')}/>
             <Button name={'Dollar'} callBack={() => filterMoneyFoo('Dollars')}/>
             <Button name={'Ruble'} callBack={() => filterMoneyFoo('RUBLS')}/>
