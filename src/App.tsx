@@ -1,8 +1,6 @@
 import React, {useState} from 'react';
 import './App.css';
 
-type FilterType = "all" | "dollar" | "ruble"
-
 function App() {
     const [money, setMoney] = useState([
         {banknote: 'dollar', nominal: 100, number: 'a1234567890'},
@@ -15,24 +13,42 @@ function App() {
         {banknote: 'ruble', nominal: 50, number: 'v1234567890'},
     ])
 
-    const [filter, setFilter] = useState<FilterType>("all")
+    type FilterType = "all" | "dollar" | "ruble"
 
-    let currentMoney = money
-    if (filter === 'dollar') {
-        currentMoney = money.filter(filteredMoney => filteredMoney.banknote === 'dollar')
-    }
-    if (filter === 'ruble') {
-        currentMoney = money.filter(filteredMoney => filteredMoney.banknote === 'ruble')
-    }
+    const [filterMoneyState, setFilterMoneyState] = useState<FilterType>("all")
 
     const onclickFilterHandler = (nameButton: FilterType) => {
-    setFilter(nameButton)
+        setFilterMoneyState(nameButton)
     }
+
+
+    const filterMoney = () => {
+
+        // let currentMoney = money
+
+        switch (filterMoneyState) {
+
+            case'dollar': {
+                return money.filter(filteredMoney => filteredMoney.banknote === 'dollar')
+            }
+
+            case'ruble':
+                return money.filter(filteredMoney => filteredMoney.banknote === 'ruble')
+        }
+        return money
+    }
+
+    // if (filter === 'dollar') {
+    //     currentMoney = money.filter(filteredMoney => filteredMoney.banknote === 'dollar')
+    // }
+    // if (filter === 'ruble') {
+    //     currentMoney = money.filter(filteredMoney => filteredMoney.banknote === 'ruble')
+    // }
 
     return (
         <>
             <ul>
-                {currentMoney.map((item, index) => {
+                {filterMoney().map((item, index) => {
                     return (
                         <li key={index}>
                             <span>{item.banknote}</span>
